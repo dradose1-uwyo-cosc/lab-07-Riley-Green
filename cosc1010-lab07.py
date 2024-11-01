@@ -1,9 +1,9 @@
-# Your Name Here
+# Riley Green
 # UWYO COSC 1010
-# Submission Date
-# Lab XX
+# Submission Date: 10/31/24
+# Lab 07
 # Lab Section: 
-# Sources, people worked with, help given to: 
+# Sources, people worked with, help given to: Bradley Ekstrom, Nolan Hottell
 # your
 # comments
 # here
@@ -17,11 +17,18 @@
     # If a user did not enter a number output a statement saying so
 # You will continue to prompt the user until a proper integer value is entered
 
-factorial = 1
-
-print(f"The result of the factorial based on the given bound is {factorial}")
-
-print("*"*75)
+while True: 
+    upper_bound = input("Enter an integer: ")
+    if upper_bound.isdigit():
+        upper_bound = int(upper_bound)
+        factorial = 1
+        for i in range(1, upper_bound + 1):
+            factorial *= i
+        print(f"The result of the factorial based on the given bound is {factorial}")
+        print("*" * 75)
+        break
+    else:
+        print("You did not give the right value. ")
 # Create a while loop that prompts a user for input of an integer values
 # Sum all inputs. When the user enters 'exit' (regardless of casing) end the loop
 # Upon ending the loop print the sum
@@ -38,10 +45,18 @@ print("*"*75)
 # The sum should start at 0 
 
 num_sum = 0 
+while True: 
+    user_input = input("Enter a number to add or type 'Add' to finish the program.")
+    if user_input.lower() == "add":
+        break
+    if user_input.lstrip('_').isdigit():
+        num_sum += int(user_input)
+    else:
+        print("Please use a number. ")
 
-print(f"Your final sum is {num_sum}")
+print(f"Your sum is {num_sum}")
 
-print("*"*75)
+print("*" * 75)
 # Now you will be creating a two operand calculator
 # It will support the following operators: +,-,/,*,% 
 # So accepted input is of the form `operand operator operand` 
@@ -59,4 +74,44 @@ print("*"*75)
 # Print the result of the equation
 # Again, loop through prompting the user for input until `exit` in any casing is input 
 
-        
+while True:
+    calc_input = input("Enter a calculation (format: operand operator operand) or 'exit' to quit: ")
+    if calc_input.lower() == 'exit':
+        break
+    if '+' in calc_input:
+        operands = calc_input.split('+')
+        operator = '+'
+    elif '-' in calc_input:
+        operands = calc_input.split('-')
+        operator = '-'
+    elif '*' in calc_input:
+        operands = calc_input.split('*')
+        operator = '*'
+    elif '/' in calc_input:
+        operands = calc_input.split('/')
+        operator = '/'
+    elif '%' in calc_input:
+        operands = calc_input.split('%')
+        operator = '%'
+    else:
+        print("Invalid operation. Please use one of +, -, *, /, %.")
+        continue
+    operand1, operand2 = operands[0].strip(), operands[1].strip()
+    if operand1.isdigit() and operand2.isdigit():
+        operand1, operand2 = int(operand1), int(operand2)
+        if operator == '+':
+            result = operand1 + operand2
+        elif operator == '-':
+            result = operand1 - operand2
+        elif operator == '*':
+            result = operand1 * operand2
+        elif operator == '/':
+            result = operand1 / operand2 if operand2 != 0 else "undefined (division by zero)"
+        elif operator == '%':
+            result = operand1 % operand2
+        print(f"The result of the calculation is: {result}")
+    else:
+        print("Invalid operands. Please enter positive integer values only.")
+print("Program ended.")
+
+
